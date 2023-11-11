@@ -31,6 +31,44 @@ class _HomePageState extends State<HomePage> {
   }
 }
 
+class CardScreen extends StatefulWidget {
+  const CardScreen({super.key});
+
+  @override
+  State<CardScreen> createState() => _CardScreenState();
+}
+
+class _CardScreenState extends State<CardScreen> {
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      home: Scaffold(
+          appBar: AppBar(
+            title: const Text("Your Profile"),
+            backgroundColor: const Color.fromRGBO(210, 32, 46, 0.984),
+          ),
+          body: Container(
+            width: MediaQuery.sizeOf(context).width,
+            height: MediaQuery.sizeOf(context).width * 0.585,
+            margin: const EdgeInsets.all(16.0),
+            decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(20),
+                image: const DecorationImage(
+                    image: AssetImage('images/bearcatcard.png'),
+                    fit: BoxFit.contain),
+                boxShadow: const [
+                  BoxShadow(
+                    color: Colors.red,
+                    blurRadius: 12,
+                    offset: Offset(0, 4),
+                    spreadRadius: -5,
+                  ),
+                ]),
+          )),
+    );
+  }
+}
+
 class LoginScreen extends StatefulWidget {
   const LoginScreen({super.key});
 
@@ -50,13 +88,13 @@ class _LoginScreenState extends State<LoginScreen> {
           const Text(
             "Let Me In UC",
             style: TextStyle(
-              color: Colors.black,
+              color: const Color.fromRGBO(210, 32, 46, 0.984),
               fontSize: 28.0,
               fontWeight: FontWeight.bold,
             ),
           ),
           const Text(
-            "Login to your app",
+            "Login",
             style: TextStyle(
               color: Colors.black,
               fontSize: 44.0,
@@ -88,7 +126,7 @@ class _LoginScreenState extends State<LoginScreen> {
           ),
           const Text(
             "Don't Remember your Password?",
-            style: TextStyle(color: Colors.blue),
+            style: TextStyle(color: const Color.fromRGBO(210, 32, 46, 0.984)),
           ),
           const SizedBox(
             height: 88.0,
@@ -96,12 +134,15 @@ class _LoginScreenState extends State<LoginScreen> {
           Container(
             width: double.infinity,
             child: RawMaterialButton(
-              fillColor: const Color(0xFF0069FE),
+              fillColor: const Color.fromRGBO(210, 32, 46, 0.984),
               elevation: 0.0,
               padding: const EdgeInsets.symmetric(vertical: 20.0),
               shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(12.0)),
-              onPressed: () {},
+              onPressed: () {
+                Navigator.push(context,
+                    MaterialPageRoute(builder: (context) => CardScreen()));
+              },
               child: const Text("Login",
                   style: TextStyle(
                     color: Colors.white,
