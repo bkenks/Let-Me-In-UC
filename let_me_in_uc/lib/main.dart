@@ -139,10 +139,7 @@ class _LoginScreenState extends State<LoginScreen> {
               padding: const EdgeInsets.symmetric(vertical: 20.0),
               shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(12.0)),
-              onPressed: () {
-                Navigator.push(context,
-                    MaterialPageRoute(builder: (context) => CardScreen()));
-              },
+              onPressed: () {},
               child: const Text("Login",
                   style: TextStyle(
                     color: Colors.white,
