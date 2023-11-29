@@ -1,6 +1,15 @@
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+import 'package:let_me_in_uc/firebase_options.dart';
+import 'package:let_me_in_uc/profile_screen.dart';
 
-void main() {
+Future<void> main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+
+  await Firebase.initializeApp(
+    options: DefaultFirebaseOptions.currentPlatform,
+  );
   runApp(const MainApp());
 }
 
@@ -23,10 +32,26 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
+  //Init firebase App
+  Future<FirebaseApp> _initializeFirebase() async {
+    FirebaseApp firebaseApp = await Firebase.initializeApp();
+    return firebaseApp;
+  }
+
   @override
   Widget build(BuildContext context) {
-    return const Scaffold(
-      body: LoginScreen(),
+    return Scaffold(
+      body: FutureBuilder(
+        future: _initializeFirebase(),
+        builder: (context, snapshot) {
+          if (snapshot.connectionState == ConnectionState.done) {
+            return const LoginScreen();
+          }
+          return const Center(
+            child: CircularProgressIndicator(),
+          );
+        },
+      ),
     );
   }
 }
@@ -39,8 +64,32 @@ class LoginScreen extends StatefulWidget {
 }
 
 class _LoginScreenState extends State<LoginScreen> {
+//Login function
+
+  static Future<User?> loginUsingEmailPassword(
+      {required String email,
+      required String password,
+      required BuildContext context}) async {
+    FirebaseAuth auth = FirebaseAuth.instance;
+    User? user;
+    try {
+      UserCredential userCredential = await auth.signInWithEmailAndPassword(
+          email: email, password: password);
+      user = userCredential.user;
+    } on FirebaseAuthException catch (e) {
+      if (e.code == "user-not-found") {
+        print("No user found for that email");
+      }
+    }
+
+    return user;
+  }
+
   @override
   Widget build(BuildContext context) {
+    //Textfield controller
+    TextEditingController _emailController = TextEditingController();
+    TextEditingController _passwordController = TextEditingController();
     return Padding(
       padding: const EdgeInsets.all(16.0),
       child: Column(
@@ -66,9 +115,10 @@ class _LoginScreenState extends State<LoginScreen> {
           const SizedBox(
             height: 44.0,
           ),
-          const TextField(
+          TextField(
+            controller: _emailController,
             keyboardType: TextInputType.emailAddress,
-            decoration: InputDecoration(
+            decoration: const InputDecoration(
               hintText: "User Email",
               prefixIcon: Icon(Icons.mail, color: Colors.black),
             ),
@@ -76,9 +126,10 @@ class _LoginScreenState extends State<LoginScreen> {
           const SizedBox(
             height: 26.0,
           ),
-          const TextField(
+          TextField(
+            controller: _passwordController,
             obscureText: true,
-            decoration: InputDecoration(
+            decoration: const InputDecoration(
               hintText: "User Password",
               prefixIcon: Icon(Icons.lock, color: Colors.black),
             ),
@@ -101,7 +152,17 @@ class _LoginScreenState extends State<LoginScreen> {
               padding: const EdgeInsets.symmetric(vertical: 20.0),
               shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(12.0)),
-              onPressed: () {},
+              onPressed: () async {
+                User? user = await loginUsingEmailPassword(
+                    email: _emailController.text,
+                    password: _passwordController.text,
+                    context: context);
+                print(user);
+                if (user != null) {
+                  Navigator.of(context).pushReplacement(
+                      MaterialPageRoute(builder: (context) => ProfileScreen()));
+                }
+              },
               child: const Text("Login",
                   style: TextStyle(
                     color: Colors.white,

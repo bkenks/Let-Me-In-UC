@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "887795557726",
+    "project_id": "letmeinuc-bcd70",
+    "storage_bucket": "letmeinuc-bcd70.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:887795557726:android:be9d7d9650e991793e9bcf",
+        "android_client_info": {
+          "package_name": "com.example.let_me_in_uc"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAwvEKDFkAPhibBDIibhVhFoJDVIF3c8bA"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
