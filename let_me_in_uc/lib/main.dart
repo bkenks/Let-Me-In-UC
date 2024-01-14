@@ -2,6 +2,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:let_me_in_uc/firebase_options.dart';
+import 'package:let_me_in_uc/pages/card_screen.dart';
 import 'package:let_me_in_uc/profile_screen.dart';
 
 Future<void> main() async {
@@ -18,8 +19,12 @@ class MainApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const MaterialApp(
+    return MaterialApp(
+      debugShowCheckedModeBanner: false,
       home: HomePage(),
+      routes: {
+        '/card_screen': (context) => CardScreen(),
+      },
     );
   }
 }
@@ -99,13 +104,13 @@ class _LoginScreenState extends State<LoginScreen> {
           const Text(
             "Let Me In UC",
             style: TextStyle(
-              color: const Color.fromRGBO(210, 32, 46, 0.984),
+              color: Colors.black,
               fontSize: 28.0,
               fontWeight: FontWeight.bold,
             ),
           ),
           const Text(
-            "Login",
+            "Login to your app",
             style: TextStyle(
               color: Colors.black,
               fontSize: 44.0,
@@ -139,7 +144,7 @@ class _LoginScreenState extends State<LoginScreen> {
           ),
           const Text(
             "Don't Remember your Password?",
-            style: TextStyle(color: const Color.fromRGBO(210, 32, 46, 0.984)),
+            style: TextStyle(color: Colors.blue),
           ),
           const SizedBox(
             height: 88.0,
@@ -147,7 +152,7 @@ class _LoginScreenState extends State<LoginScreen> {
           Container(
             width: double.infinity,
             child: RawMaterialButton(
-              fillColor: const Color.fromRGBO(210, 32, 46, 0.984),
+              fillColor: const Color(0xFF0069FE),
               elevation: 0.0,
               padding: const EdgeInsets.symmetric(vertical: 20.0),
               shape: RoundedRectangleBorder(
@@ -159,8 +164,9 @@ class _LoginScreenState extends State<LoginScreen> {
                     context: context);
                 print(user);
                 if (user != null) {
-                  Navigator.of(context).pushReplacement(
-                      MaterialPageRoute(builder: (context) => ProfileScreen()));
+                  //Navigator.of(context).pushReplacement(
+                  //    MaterialPageRoute(builder: (context) => ProfileScreen()));
+                  Navigator.pushReplacementNamed(context, '/card_screen');
                 }
               },
               child: const Text("Login",
