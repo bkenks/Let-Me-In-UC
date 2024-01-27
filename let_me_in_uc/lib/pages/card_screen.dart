@@ -13,7 +13,24 @@ class _CardScreenState extends State<CardScreen> {
     return Scaffold(
       appBar: AppBar(
         title: const Text("Your Profile"),
-        backgroundColor: const Color.fromRGBO(210, 32, 46, 0.984),
+        backgroundColor: const Color.fromRGBO(210, 32, 46, 1),
+      ),
+      drawer: Drawer(
+        backgroundColor: const Color.fromRGBO(210, 32, 46, 1),
+        child: Column(
+          children: [
+            DrawerHeader(child: Text("Menu")),
+            ListTile(
+              leading: Icon(Icons.home),
+              title: Text("Home"),
+              onTap: () {
+                Navigator.pop(context);
+
+                Navigator.pushNamed(context, '/help_page');
+              },
+            ),
+          ],
+        ),
       ),
       body: Container(
         width: MediaQuery.sizeOf(context).width,

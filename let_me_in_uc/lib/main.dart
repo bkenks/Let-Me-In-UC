@@ -3,7 +3,14 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:let_me_in_uc/firebase_options.dart';
 import 'package:let_me_in_uc/pages/card_screen.dart';
+import 'package:let_me_in_uc/pages/help_screen.dart';
 import 'package:let_me_in_uc/profile_screen.dart';
+import 'package:let_me_in_uc/util/AppColor.dart';
+
+List<App_Color> myBgColors = const <App_Color>[
+  App_Color(Color(0xFFFFC100), 'Orange'),
+  App_Color(const Color(0xFF91FAFF), 'Light Blue'),
+];
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -24,6 +31,7 @@ class MainApp extends StatelessWidget {
       home: HomePage(),
       routes: {
         '/card_screen': (context) => CardScreen(),
+        '/help_screen': (context) => HelpScreen(),
       },
     );
   }
@@ -99,21 +107,21 @@ class _LoginScreenState extends State<LoginScreen> {
       padding: const EdgeInsets.all(16.0),
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
-        crossAxisAlignment: CrossAxisAlignment.start,
+        crossAxisAlignment: CrossAxisAlignment.center,
         children: [
           const Text(
             "Let Me In UC",
             style: TextStyle(
-              color: Colors.black,
+              color: AppColor.ucRed,
               fontSize: 28.0,
               fontWeight: FontWeight.bold,
             ),
           ),
           const Text(
-            "Login to your app",
+            "Login",
             style: TextStyle(
-              color: Colors.black,
-              fontSize: 44.0,
+              color: AppColor.ucRed,
+              fontSize: 65.5,
               fontWeight: FontWeight.bold,
             ),
           ),
@@ -121,22 +129,36 @@ class _LoginScreenState extends State<LoginScreen> {
             height: 44.0,
           ),
           TextField(
+            style: const TextStyle(color: AppColor.ucRed),
             controller: _emailController,
             keyboardType: TextInputType.emailAddress,
             decoration: const InputDecoration(
-              hintText: "User Email",
-              prefixIcon: Icon(Icons.mail, color: Colors.black),
+              enabledBorder: UnderlineInputBorder(
+                borderSide: BorderSide(color: Colors.grey),
+              ),
+              focusedBorder: UnderlineInputBorder(
+                borderSide: BorderSide(color: AppColor.ucRed),
+              ),
+              hintText: "Email",
+              prefixIcon: Icon(Icons.mail, color: AppColor.ucRed),
             ),
           ),
           const SizedBox(
             height: 26.0,
           ),
           TextField(
+            style: const TextStyle(color: AppColor.ucRed),
             controller: _passwordController,
             obscureText: true,
             decoration: const InputDecoration(
-              hintText: "User Password",
-              prefixIcon: Icon(Icons.lock, color: Colors.black),
+              enabledBorder: UnderlineInputBorder(
+                borderSide: BorderSide(color: Colors.grey),
+              ),
+              focusedBorder: UnderlineInputBorder(
+                borderSide: BorderSide(color: AppColor.ucRed),
+              ),
+              hintText: "Password",
+              prefixIcon: Icon(Icons.lock, color: AppColor.ucRed),
             ),
           ),
           const SizedBox(
@@ -144,7 +166,7 @@ class _LoginScreenState extends State<LoginScreen> {
           ),
           const Text(
             "Don't Remember your Password?",
-            style: TextStyle(color: Colors.blue),
+            style: TextStyle(color: AppColor.ucRed),
           ),
           const SizedBox(
             height: 88.0,
@@ -152,7 +174,7 @@ class _LoginScreenState extends State<LoginScreen> {
           Container(
             width: double.infinity,
             child: RawMaterialButton(
-              fillColor: const Color(0xFF0069FE),
+              fillColor: AppColor.ucRed,
               elevation: 0.0,
               padding: const EdgeInsets.symmetric(vertical: 20.0),
               shape: RoundedRectangleBorder(
@@ -162,7 +184,6 @@ class _LoginScreenState extends State<LoginScreen> {
                     email: _emailController.text,
                     password: _passwordController.text,
                     context: context);
-                print(user);
                 if (user != null) {
                   //Navigator.of(context).pushReplacement(
                   //    MaterialPageRoute(builder: (context) => ProfileScreen()));
