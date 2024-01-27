@@ -7,11 +7,6 @@ import 'package:let_me_in_uc/pages/help_screen.dart';
 import 'package:let_me_in_uc/profile_screen.dart';
 import 'package:let_me_in_uc/util/AppColor.dart';
 
-List<App_Color> myBgColors = const <App_Color>[
-  App_Color(Color(0xFFFFC100), 'Orange'),
-  App_Color(const Color(0xFF91FAFF), 'Light Blue'),
-];
-
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
 
