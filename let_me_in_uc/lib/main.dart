@@ -2,9 +2,9 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:let_me_in_uc/firebase_options.dart';
+import 'package:let_me_in_uc/pages/card_access.dart';
 import 'package:let_me_in_uc/pages/card_screen.dart';
 import 'package:let_me_in_uc/pages/help_screen.dart';
-import 'package:let_me_in_uc/profile_screen.dart';
 import 'package:let_me_in_uc/util/AppColor.dart';
 
 Future<void> main() async {
@@ -23,10 +23,12 @@ class MainApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      home: HomePage(),
+      home: const HomePage(),
       routes: {
-        '/card_screen': (context) => CardScreen(),
-        '/help_screen': (context) => HelpScreen(),
+        '/main': (context) => const MainApp(),
+        '/card_screen': (context) => const CardScreen(),
+        '/card_access': (context) => const CardAccess(),
+        '/help_screen': (context) => const HelpScreen(),
       },
     );
   }
@@ -80,6 +82,7 @@ class _LoginScreenState extends State<LoginScreen> {
       required BuildContext context}) async {
     FirebaseAuth auth = FirebaseAuth.instance;
     User? user;
+
     try {
       UserCredential userCredential = await auth.signInWithEmailAndPassword(
           email: email, password: password);
@@ -96,8 +99,8 @@ class _LoginScreenState extends State<LoginScreen> {
   @override
   Widget build(BuildContext context) {
     //Textfield controller
-    TextEditingController _emailController = TextEditingController();
-    TextEditingController _passwordController = TextEditingController();
+    TextEditingController emailController = TextEditingController();
+    TextEditingController passwordController = TextEditingController();
     return Padding(
       padding: const EdgeInsets.all(16.0),
       child: Column(
@@ -125,7 +128,7 @@ class _LoginScreenState extends State<LoginScreen> {
           ),
           TextField(
             style: const TextStyle(color: AppColor.ucRed),
-            controller: _emailController,
+            controller: emailController,
             keyboardType: TextInputType.emailAddress,
             decoration: const InputDecoration(
               enabledBorder: UnderlineInputBorder(
@@ -143,7 +146,7 @@ class _LoginScreenState extends State<LoginScreen> {
           ),
           TextField(
             style: const TextStyle(color: AppColor.ucRed),
-            controller: _passwordController,
+            controller: passwordController,
             obscureText: true,
             decoration: const InputDecoration(
               enabledBorder: UnderlineInputBorder(
@@ -176,12 +179,14 @@ class _LoginScreenState extends State<LoginScreen> {
                   borderRadius: BorderRadius.circular(12.0)),
               onPressed: () async {
                 User? user = await loginUsingEmailPassword(
-                    email: _emailController.text,
-                    password: _passwordController.text,
+                    email: emailController.text,
+                    password: passwordController.text,
                     context: context);
                 if (user != null) {
                   //Navigator.of(context).pushReplacement(
                   //    MaterialPageRoute(builder: (context) => ProfileScreen()));
+
+                  if (!mounted) return;
                   Navigator.pushReplacementNamed(context, '/card_screen');
                 }
               },
