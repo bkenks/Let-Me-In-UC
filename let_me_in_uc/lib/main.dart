@@ -2,8 +2,10 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:let_me_in_uc/firebase_options.dart';
+import 'package:let_me_in_uc/pages/card_access.dart';
 import 'package:let_me_in_uc/pages/card_screen.dart';
-import 'package:let_me_in_uc/profile_screen.dart';
+import 'package:let_me_in_uc/pages/help_screen.dart';
+import 'package:let_me_in_uc/util/AppColor.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -21,9 +23,12 @@ class MainApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      home: HomePage(),
+      home: const HomePage(),
       routes: {
-        '/card_screen': (context) => CardScreen(),
+        '/main': (context) => const MainApp(),
+        '/card_screen': (context) => const CardScreen(),
+        '/card_access': (context) => const CardAccess(),
+        '/help_screen': (context) => const HelpScreen(),
       },
     );
   }
@@ -77,6 +82,7 @@ class _LoginScreenState extends State<LoginScreen> {
       required BuildContext context}) async {
     FirebaseAuth auth = FirebaseAuth.instance;
     User? user;
+
     try {
       UserCredential userCredential = await auth.signInWithEmailAndPassword(
           email: email, password: password);
@@ -93,27 +99,27 @@ class _LoginScreenState extends State<LoginScreen> {
   @override
   Widget build(BuildContext context) {
     //Textfield controller
-    TextEditingController _emailController = TextEditingController();
-    TextEditingController _passwordController = TextEditingController();
+    TextEditingController emailController = TextEditingController();
+    TextEditingController passwordController = TextEditingController();
     return Padding(
       padding: const EdgeInsets.all(16.0),
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
-        crossAxisAlignment: CrossAxisAlignment.start,
+        crossAxisAlignment: CrossAxisAlignment.center,
         children: [
           const Text(
             "Let Me In UC",
             style: TextStyle(
-              color: Colors.black,
+              color: AppColor.ucRed,
               fontSize: 28.0,
               fontWeight: FontWeight.bold,
             ),
           ),
           const Text(
-            "Login to your app",
+            "Login",
             style: TextStyle(
-              color: Colors.black,
-              fontSize: 44.0,
+              color: AppColor.ucRed,
+              fontSize: 65.5,
               fontWeight: FontWeight.bold,
             ),
           ),
@@ -121,22 +127,36 @@ class _LoginScreenState extends State<LoginScreen> {
             height: 44.0,
           ),
           TextField(
-            controller: _emailController,
+            style: const TextStyle(color: AppColor.ucRed),
+            controller: emailController,
             keyboardType: TextInputType.emailAddress,
             decoration: const InputDecoration(
-              hintText: "User Email",
-              prefixIcon: Icon(Icons.mail, color: Colors.black),
+              enabledBorder: UnderlineInputBorder(
+                borderSide: BorderSide(color: Colors.grey),
+              ),
+              focusedBorder: UnderlineInputBorder(
+                borderSide: BorderSide(color: AppColor.ucRed),
+              ),
+              hintText: "Email",
+              prefixIcon: Icon(Icons.mail, color: AppColor.ucRed),
             ),
           ),
           const SizedBox(
             height: 26.0,
           ),
           TextField(
-            controller: _passwordController,
+            style: const TextStyle(color: AppColor.ucRed),
+            controller: passwordController,
             obscureText: true,
             decoration: const InputDecoration(
-              hintText: "User Password",
-              prefixIcon: Icon(Icons.lock, color: Colors.black),
+              enabledBorder: UnderlineInputBorder(
+                borderSide: BorderSide(color: Colors.grey),
+              ),
+              focusedBorder: UnderlineInputBorder(
+                borderSide: BorderSide(color: AppColor.ucRed),
+              ),
+              hintText: "Password",
+              prefixIcon: Icon(Icons.lock, color: AppColor.ucRed),
             ),
           ),
           const SizedBox(
@@ -144,7 +164,7 @@ class _LoginScreenState extends State<LoginScreen> {
           ),
           const Text(
             "Don't Remember your Password?",
-            style: TextStyle(color: Colors.blue),
+            style: TextStyle(color: AppColor.ucRed),
           ),
           const SizedBox(
             height: 88.0,
@@ -152,20 +172,21 @@ class _LoginScreenState extends State<LoginScreen> {
           Container(
             width: double.infinity,
             child: RawMaterialButton(
-              fillColor: const Color(0xFF0069FE),
+              fillColor: AppColor.ucRed,
               elevation: 0.0,
               padding: const EdgeInsets.symmetric(vertical: 20.0),
               shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(12.0)),
               onPressed: () async {
                 User? user = await loginUsingEmailPassword(
-                    email: _emailController.text,
-                    password: _passwordController.text,
+                    email: emailController.text,
+                    password: passwordController.text,
                     context: context);
-                print(user);
                 if (user != null) {
                   //Navigator.of(context).pushReplacement(
                   //    MaterialPageRoute(builder: (context) => ProfileScreen()));
+
+                  if (!mounted) return;
                   Navigator.pushReplacementNamed(context, '/card_screen');
                 }
               },

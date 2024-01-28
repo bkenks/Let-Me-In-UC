@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:let_me_in_uc/util/AppColor.dart';
 
 class CardScreen extends StatefulWidget {
   const CardScreen({super.key});
@@ -13,7 +14,65 @@ class _CardScreenState extends State<CardScreen> {
     return Scaffold(
       appBar: AppBar(
         title: const Text("Your Profile"),
-        backgroundColor: const Color.fromRGBO(210, 32, 46, 0.984),
+        backgroundColor: AppColor.ucRed,
+      ),
+      drawer: Drawer(
+        backgroundColor: AppColor.ucRed,
+        child: Column(
+          children: [
+            const DrawerHeader(
+              child: Text(
+                "Menu",
+                style: TextStyle(color: AppColor.white),
+              ),
+            ),
+            ListTile(
+              leading: const Icon(
+                Icons.home,
+                color: AppColor.white,
+              ),
+              title: const Text(
+                "Card Access",
+                style: TextStyle(color: AppColor.white),
+              ),
+              onTap: () {
+                Navigator.pop(context);
+
+                Navigator.pushNamed(context, '/card_access');
+              },
+            ),
+            ListTile(
+              leading: const Icon(
+                Icons.help_rounded,
+                color: AppColor.white,
+              ),
+              title: const Text(
+                "Help",
+                style: TextStyle(color: AppColor.white),
+              ),
+              onTap: () {
+                Navigator.pop(context);
+
+                Navigator.pushNamed(context, '/help_screen');
+              },
+            ),
+            ListTile(
+              leading: const Icon(
+                Icons.logout_rounded,
+                color: AppColor.white,
+              ),
+              title: const Text(
+                "Logout",
+                style: TextStyle(color: AppColor.white),
+              ),
+              onTap: () {
+                Navigator.pop(context);
+
+                Navigator.pushNamed(context, '/main');
+              },
+            ),
+          ],
+        ),
       ),
       body: Container(
         width: MediaQuery.sizeOf(context).width,
@@ -26,7 +85,7 @@ class _CardScreenState extends State<CardScreen> {
                 fit: BoxFit.contain),
             boxShadow: const [
               BoxShadow(
-                color: Colors.red,
+                color: AppColor.ucRed,
                 blurRadius: 12,
                 offset: Offset(0, 4),
                 spreadRadius: -5,
