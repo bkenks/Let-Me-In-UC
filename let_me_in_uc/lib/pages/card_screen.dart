@@ -13,7 +13,7 @@ class _CardScreenState extends State<CardScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text("Your Profile"),
+        title: const Text("Profile"),
         backgroundColor: AppColor.ucRed,
       ),
       drawer: Drawer(
@@ -85,9 +85,9 @@ class _CardScreenState extends State<CardScreen> {
                 fit: BoxFit.contain),
             boxShadow: const [
               BoxShadow(
-                color: AppColor.ucRed,
+                color: Colors.black,
                 blurRadius: 12,
-                offset: Offset(0, 4),
+                offset: Offset(0, 0),
                 spreadRadius: -5,
               ),
             ]),

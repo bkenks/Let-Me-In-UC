@@ -174,7 +174,7 @@ class _LoginScreenState extends State<LoginScreen> {
             child: RawMaterialButton(
               fillColor: AppColor.ucRed,
               elevation: 0.0,
-              padding: const EdgeInsets.symmetric(vertical: 20.0),
+              padding: const EdgeInsets.symmetric(vertical: 15.0),
               shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(12.0)),
               onPressed: () async {
@@ -192,9 +192,9 @@ class _LoginScreenState extends State<LoginScreen> {
               },
               child: const Text("Login",
                   style: TextStyle(
-                    color: Colors.white,
-                    fontSize: 18.0,
-                  )),
+                      color: Colors.white,
+                      fontSize: 32.0,
+                      fontWeight: FontWeight.w400)),
             ),
           ),
         ],
