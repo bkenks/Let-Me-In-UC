@@ -6,7 +6,7 @@ class CardAccess extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return const Scaffold(
-      body: Text("get outta here"),
+      body: Center(child: Text("Not Completed")),
     );
   }
 }

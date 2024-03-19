@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:let_me_in_uc/util/AppColor.dart';
+import 'package:let_me_in_uc/firebase_options.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_core/firebase_core.dart';
 
 class CardScreen extends StatefulWidget {
   const CardScreen({super.key});
@@ -9,6 +12,9 @@ class CardScreen extends StatefulWidget {
 }
 
 class _CardScreenState extends State<CardScreen> {
+
+  db = FirebaseFirestore.instance;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -17,7 +23,6 @@ class _CardScreenState extends State<CardScreen> {
         backgroundColor: AppColor.ucRed,
       ),
       drawer: Drawer(
-        backgroundColor: AppColor.ucRed,
         child: Column(
           children: [
             const DrawerHeader(
@@ -91,6 +96,7 @@ class _CardScreenState extends State<CardScreen> {
                 spreadRadius: -5,
               ),
             ]),
+            //child: Text(MNumber),
       ),
     );
   }
