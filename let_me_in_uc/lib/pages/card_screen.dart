@@ -1,3 +1,4 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:let_me_in_uc/util/AppColor.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -11,16 +12,72 @@ class CardScreen extends StatefulWidget {
 
 class _CardScreenState extends State<CardScreen> {
 
-  db = FirebaseFirestore.instance();
+  //////////    Just ignore this temporarliy   //////////
+  // Future<String> getMNum () async {
+  //   FirebaseFirestore db = FirebaseFirestore.instance;
+  //   final userRef = db.collection("Person").doc("1kmRfFeYg3aKzAxwQxVb");
+  //   final userDoc = await userRef.get();
+  //   final userData = userDoc.data();
+
+  //   return userData!['email'];
+  // }
+  //////////    End   //////////
 
   @override
   Widget build(BuildContext context) {
+    
+    // This is the working code
+    FirebaseFirestore db = FirebaseFirestore.instance;
+    final docRef = db.collection("Person").doc("1kmRfFeYg3aKzAxwQxVb");
+    var data;
+    var email;
+    docRef.get().then(
+      (DocumentSnapshot doc) {
+        data = doc.data() as Map<String, dynamic>;
+
+        // When calling the 'email' variable, it causes the error I was talking about. The print statement works though
+        email = data['email'];
+        print(data['email']);
+
+      },
+      onError: (e) => print("Error getting document: $e"),
+    );
+    
+
+    //////////  Code for accessing database through the current user  //////////
+    // Future<DocumentSnapshot> getUserInfo()async{
+    //   var firebaseUser = await FirebaseAuth.instance.currentUser();
+    //   return await FirebaseFirestore.instance.collection("users").document(firebaseUser.uid).get();
+    // }
+
+    // FutureBuilder(
+    //         future: getUserInfo(),
+    //         builder: (context, AsyncSnapshot<DocumentSnapshot> snapshot) {
+    //           if (snapshot.connectionState == ConnectionState.done) {
+    //             return ListView.builder(
+    //                 shrinkWrap: true,
+    //                 itemCount: 1,
+    //                 itemBuilder: (BuildContext context, int index) {
+    //                   return ListTile(
+    //                     title:
+    //                         Text(snapshot.data.data["email"]),
+    //                   );
+    //                 });
+    //           } else if (snapshot.connectionState == ConnectionState.none) {
+    //             return Text("No data");
+    //           }
+    //           return CircularProgressIndicator();
+    //         },
+    //   ),
+    //////////    End    //////////
+
     return Scaffold(
       appBar: AppBar(
         title: const Text("Profile"),
         backgroundColor: AppColor.ucRed,
       ),
       drawer: Drawer(
+        backgroundColor: AppColor.ucRed,
         child: Column(
           children: [
             const DrawerHeader(
@@ -28,6 +85,13 @@ class _CardScreenState extends State<CardScreen> {
                 "Menu",
                 style: TextStyle(color: AppColor.white),
               ),
+            ),
+            ListTile(
+              title: Text(
+                email,
+                style: const TextStyle(color: AppColor.white),
+              ),
+              onTap: () {},
             ),
             ListTile(
               leading: const Icon(
