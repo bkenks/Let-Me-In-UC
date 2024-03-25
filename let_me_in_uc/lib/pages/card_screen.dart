@@ -6,7 +6,6 @@ import 'package:let_me_in_uc/util/AppColor.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 
 class CardScreen extends StatefulWidget {
-
   final User? user;
 
   const CardScreen({super.key, required this.user});
@@ -16,13 +15,12 @@ class CardScreen extends StatefulWidget {
 }
 
 class _CardScreenState extends State<CardScreen> {
-
   @override
   Widget build(BuildContext context) {
-    
     // This is the working code
     FirebaseFirestore db = FirebaseFirestore.instance;
-    final docRef = db.collection("Person").doc(widget.user?.uid);
+    var docRef = db.collection("Person").doc(widget.user?.uid);
+    DocumentReference<Map<String, dynamic>> userUniqueId = docRef;
     var data;
     var email = "";
 
@@ -32,7 +30,6 @@ class _CardScreenState extends State<CardScreen> {
         data = doc.data() as Map<String, dynamic>;
 
         print(data['mNumber']);
-
       },
       onError: (e) => print("Error getting document: $e"),
     );
@@ -52,31 +49,35 @@ class _CardScreenState extends State<CardScreen> {
                 style: TextStyle(color: AppColor.white),
               ),
             ),
+            ListTile(
+              title: Text(
+                userUniqueId.id,
+                style: const TextStyle(color: AppColor.white),
+              ),
+            ),
             // This is where I'm trying to insert the MNumber
             // I can't get it to work though properly
-            StreamBuilder<QuerySnapshot>(
-              stream: db.collection("Person").snapshots(),
-              builder: (context, snapshot) {
-                if(snapshot.hasData) {
+            // StreamBuilder<QuerySnapshot>(
+            //   stream: db.collection("Person").snapshots(),
+            //   builder: (context, snapshot) {
+            //     if (snapshot.hasData) {
+            //       final List<DocumentSnapshot> documents = snapshot.data!.docs;
 
-                  final List<DocumentSnapshot> documents = snapshot.data!.docs;
-                  
-                  return const ListTile(
-                      title: Text(
-                      "Test",
-                      style: const TextStyle(color: AppColor.white),
-                    ),
-                  );
-                } else {
-                  return ListTile(
-                      title: Text(
-                      snapshot.error.toString(),
-                      style: TextStyle(color: AppColor.white),
-                    )
-                  );
-                }
-              },
-            ),
+            //       return const ListTile(
+            //         title: Text(
+            //           "Test",
+            //           style: const TextStyle(color: AppColor.white),
+            //         ),
+            //       );
+            //     } else {
+            //       return ListTile(
+            //           title: Text(
+            //         snapshot.error.toString(),
+            //         style: TextStyle(color: AppColor.white),
+            //       ));
+            //     }
+            //   },
+            // ),
             ListTile(
               leading: const Icon(
                 Icons.home,
@@ -142,7 +143,7 @@ class _CardScreenState extends State<CardScreen> {
                 spreadRadius: -5,
               ),
             ]),
-            //child: Text(MNumber),
+        //child: Text(MNumber),
       ),
     );
   }
