@@ -1,5 +1,4 @@
 // ignore_for_file: prefer_const_constructors
-
 import 'package:flutter/material.dart';
 import 'package:let_me_in_uc/util/AppColor.dart';
 
@@ -10,8 +9,14 @@ class HelpScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("Help"),
+        title: Text(
+          "Help",
+          style: TextStyle(
+            fontWeight: FontWeight.bold,
+          ),
+        ),
         backgroundColor: AppColor.ucRed,
+        foregroundColor: AppColor.white,
       ),
       body: Center(
         child: Column(
