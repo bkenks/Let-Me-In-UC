@@ -1,7 +1,10 @@
 //import 'dart:html';
 
+import 'dart:async';
+
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import 'package:let_me_in_uc/util/AppColor.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 
@@ -23,15 +26,15 @@ class _CardScreenState extends State<CardScreen> {
     // This is the working code
     FirebaseFirestore db = FirebaseFirestore.instance;
     final docRef = db.collection("Person").doc(widget.user?.uid);
-    var data;
+    Map<String, dynamic> userData = {};
     var email = "";
 
     // This is just a test to grab the data. I have no clue how to incorporate this into the UI
     docRef.get().then(
       (DocumentSnapshot doc) {
-        data = doc.data() as Map<String, dynamic>;
+        userData = doc.data() as Map<String, dynamic>;
 
-        print(data['mNumber']);
+        print(userData['mNumber']);
 
       },
       onError: (e) => print("Error getting document: $e"),
@@ -54,8 +57,8 @@ class _CardScreenState extends State<CardScreen> {
             ),
             // This is where I'm trying to insert the MNumber
             // I can't get it to work though properly
-            StreamBuilder<QuerySnapshot>(
-              stream: db.collection("Person").snapshots(),
+            FutureBuilder<DocumentSnapshot>(
+              future: docRef.get(),
               builder: (context, snapshot) {
                 if(snapshot.hasData) {
 
