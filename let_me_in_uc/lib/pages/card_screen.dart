@@ -1,10 +1,15 @@
+//import 'dart:html';
+
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:let_me_in_uc/util/AppColor.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 
 class CardScreen extends StatefulWidget {
-  const CardScreen({super.key});
+
+  final User? user;
+
+  const CardScreen({super.key, required this.user});
 
   @override
   State<CardScreen> createState() => _CardScreenState();
@@ -12,64 +17,25 @@ class CardScreen extends StatefulWidget {
 
 class _CardScreenState extends State<CardScreen> {
 
-  //////////    Just ignore this temporarliy   //////////
-  // Future<String> getMNum () async {
-  //   FirebaseFirestore db = FirebaseFirestore.instance;
-  //   final userRef = db.collection("Person").doc("1kmRfFeYg3aKzAxwQxVb");
-  //   final userDoc = await userRef.get();
-  //   final userData = userDoc.data();
-
-  //   return userData!['email'];
-  // }
-  //////////    End   //////////
-
   @override
   Widget build(BuildContext context) {
     
     // This is the working code
     FirebaseFirestore db = FirebaseFirestore.instance;
-    final docRef = db.collection("Person").doc("1kmRfFeYg3aKzAxwQxVb");
+    final docRef = db.collection("Person").doc(widget.user?.uid);
     var data;
-    var email;
+    var email = "";
+
+    // This is just a test to grab the data. I have no clue how to incorporate this into the UI
     docRef.get().then(
       (DocumentSnapshot doc) {
         data = doc.data() as Map<String, dynamic>;
 
-        // When calling the 'email' variable, it causes the error I was talking about. The print statement works though
-        email = data['email'];
-        print(data['email']);
+        print(data['mNumber']);
 
       },
       onError: (e) => print("Error getting document: $e"),
     );
-    
-
-    //////////  Code for accessing database through the current user  //////////
-    // Future<DocumentSnapshot> getUserInfo()async{
-    //   var firebaseUser = await FirebaseAuth.instance.currentUser();
-    //   return await FirebaseFirestore.instance.collection("users").document(firebaseUser.uid).get();
-    // }
-
-    // FutureBuilder(
-    //         future: getUserInfo(),
-    //         builder: (context, AsyncSnapshot<DocumentSnapshot> snapshot) {
-    //           if (snapshot.connectionState == ConnectionState.done) {
-    //             return ListView.builder(
-    //                 shrinkWrap: true,
-    //                 itemCount: 1,
-    //                 itemBuilder: (BuildContext context, int index) {
-    //                   return ListTile(
-    //                     title:
-    //                         Text(snapshot.data.data["email"]),
-    //                   );
-    //                 });
-    //           } else if (snapshot.connectionState == ConnectionState.none) {
-    //             return Text("No data");
-    //           }
-    //           return CircularProgressIndicator();
-    //         },
-    //   ),
-    //////////    End    //////////
 
     return Scaffold(
       appBar: AppBar(
@@ -86,12 +52,30 @@ class _CardScreenState extends State<CardScreen> {
                 style: TextStyle(color: AppColor.white),
               ),
             ),
-            ListTile(
-              title: Text(
-                email,
-                style: const TextStyle(color: AppColor.white),
-              ),
-              onTap: () {},
+            // This is where I'm trying to insert the MNumber
+            // I can't get it to work though properly
+            StreamBuilder<QuerySnapshot>(
+              stream: db.collection("Person").snapshots(),
+              builder: (context, snapshot) {
+                if(snapshot.hasData) {
+
+                  final List<DocumentSnapshot> documents = snapshot.data!.docs;
+                  
+                  return const ListTile(
+                      title: Text(
+                      "Test",
+                      style: const TextStyle(color: AppColor.white),
+                    ),
+                  );
+                } else {
+                  return ListTile(
+                      title: Text(
+                      snapshot.error.toString(),
+                      style: TextStyle(color: AppColor.white),
+                    )
+                  );
+                }
+              },
             ),
             ListTile(
               leading: const Icon(

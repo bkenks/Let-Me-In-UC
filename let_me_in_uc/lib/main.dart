@@ -26,7 +26,6 @@ class MainApp extends StatelessWidget {
       home: const HomePage(),
       routes: {
         '/main': (context) => const MainApp(),
-        '/card_screen': (context) => const CardScreen(),
         '/card_access': (context) => const CardAccess(),
         '/help_screen': (context) => const HelpScreen(),
       },
@@ -183,11 +182,13 @@ class _LoginScreenState extends State<LoginScreen> {
                     password: passwordController.text,
                     context: context);
                 if (user != null) {
-                  //Navigator.of(context).pushReplacement(
-                  //    MaterialPageRoute(builder: (context) => ProfileScreen()));
+                  print(user.email);
+                  Navigator.of(context).pushReplacement(
+                     MaterialPageRoute(builder: (context) => CardScreen(user: user)));
 
-                  if (!mounted) return;
-                  Navigator.pushReplacementNamed(context, '/card_screen');
+                  // Uncomment to use alternate push. Need to add screen alias in main function first
+                  // if (!mounted) return;
+                  // Navigator.pushReplacementNamed(context, '/card_screen');
                 }
               },
               child: const Text("Login",
