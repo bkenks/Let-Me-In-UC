@@ -119,3 +119,4 @@ Project Link: [https://github.com/bkenks/Let-Me-In-UC](https://github.com/bkenks
 <!-- https://www.markdownguide.org/basic-syntax/#reference-style-links -->
 [contributors-shield]: https://img.shields.io/github/contributors/bkenks/Let-Me-In-UC.svg?style=for-the-badge
 [contributors-url]: https://github.com/bkenks/Let-Me-In-UC/graphs/contributors
+[linkedin-shield]: https://img.shields.io/badge/LinkedIn-l?style=for-the-badge&logo=linkedin&logoColor=FFFFFF&color=0A66C2
