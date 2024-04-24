@@ -38,7 +38,6 @@
 <!-- ABOUT THE PROJECT -->
 ## About The Project
 
-[![Product Name Screen Shot][product-screenshot]]
 <p align="center">
 <img src="/images/Demo.gif" width="30%" height="%"/>
 </p>
