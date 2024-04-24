@@ -91,13 +91,13 @@ Benefits:
 
 Brian Kenkel - [![LinkedIn][linkedin-shield]](https://linkedin.com/in/briankenkel) - briankenkel.t@gmail.com
 
-Hamza Rauf - [![LinkedIn][linkedin-shield]](linkedin.com/in/myachievement-hamza) - raufha@mail.uc.edu
+Hamza Rauf - [![LinkedIn][linkedin-shield]](https://www.linkedin.com/in/myachievement-hamza) - raufha@mail.uc.edu
 
 Abe Coogan - [![LinkedIn][linkedin-shield]](https://www.linkedin.com/in/abraham-coogan/) - aberz1031@gmail.com
 
-Jakob Brown - [![LinkedIn][linkedin-shield]](linkedin.com/in/jakob-brown-99b5321b9) - brown5jb@mail.uc.edu
+Jakob Brown - [![LinkedIn][linkedin-shield]](https://www.linkedin.com/in/jakob-brown-99b5321b9) - brown5jb@mail.uc.edu
 
-Bunci Patel - [![LinkedIn][linkedin-shield]](linkedin.com/in/bunci-patel-46a68716b) - sirpatel79@gmail.com
+Bunci Patel - [![LinkedIn][linkedin-shield]](https://www.linkedin.com/in/bunci-patel-46a68716b) - sirpatel79@gmail.com
 
 Project Link: [https://github.com/bkenks/Let-Me-In-UC](https://github.com/bkenks/Let-Me-In-UC)
 
