@@ -64,7 +64,6 @@
 
 <!-- USAGE EXAMPLES -->
 ## Usage
-
 * App may be used to restrict/allow physical access on campus to specific areas/rooms per student
 
 Benefits:
