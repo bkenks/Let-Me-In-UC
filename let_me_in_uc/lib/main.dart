@@ -50,16 +50,20 @@ class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: FutureBuilder(
-        future: _initializeFirebase(),
-        builder: (context, snapshot) {
-          if (snapshot.connectionState == ConnectionState.done) {
-            return const LoginScreen();
-          }
-          return const Center(
-            child: CircularProgressIndicator(),
-          );
-        },
+      body: Center(
+        child: SingleChildScrollView(
+          child: FutureBuilder(
+            future: _initializeFirebase(),
+            builder: (context, snapshot) {
+              if (snapshot.connectionState == ConnectionState.done) {
+                return const LoginScreen();
+              }
+              return const Center(
+                child: CircularProgressIndicator(),
+              );
+            },
+          ),
+        ),
       ),
     );
   }
