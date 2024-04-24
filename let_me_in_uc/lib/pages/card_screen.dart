@@ -1,8 +1,12 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:let_me_in_uc/util/AppColor.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 
 class CardScreen extends StatefulWidget {
-  const CardScreen({super.key});
+  final User? user;
+
+  const CardScreen({super.key, required this.user});
 
   @override
   State<CardScreen> createState() => _CardScreenState();
@@ -11,20 +15,63 @@ class CardScreen extends StatefulWidget {
 class _CardScreenState extends State<CardScreen> {
   @override
   Widget build(BuildContext context) {
+    FirebaseFirestore db = FirebaseFirestore.instance;
+    final docRef = db.collection("Person").doc(widget.user?.uid);
+
     return Scaffold(
       appBar: AppBar(
-        title: const Text("Profile"),
+        title: const Text(
+          "Profile",
+          style: TextStyle(fontWeight: FontWeight.bold),
+        ),
         backgroundColor: AppColor.ucRed,
+        foregroundColor: AppColor.white,
       ),
       drawer: Drawer(
         backgroundColor: AppColor.ucRed,
-        child: Column(
+        child: ListView(
+          padding: EdgeInsets.zero,
           children: [
             const DrawerHeader(
-              child: Text(
-                "Menu",
-                style: TextStyle(color: AppColor.white),
+              decoration: BoxDecoration(
+                color: Colors.white,
               ),
+              child: Center(
+                child: Text(
+                  "Let Me In UC",
+                  style: TextStyle(
+                      color: AppColor.ucRed,
+                      fontWeight: FontWeight.bold,
+                      fontSize: 40),
+                ),
+              ),
+            ),
+            FutureBuilder<DocumentSnapshot>(
+              future: docRef.get(),
+              builder: (context, snapshot) {
+                if (snapshot.hasData) {
+                  var userData = snapshot.data!.data() as Map<String, dynamic>;
+                  String mNumber = userData['mNumber'];
+                  String fullName =
+                      userData['firstName'] + " " + userData['lastName'];
+
+                  return ListTile(
+                    title: Text(
+                      "$fullName - $mNumber",
+                      style: const TextStyle(
+                        color: AppColor.white,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                  );
+                } else {
+                  return const ListTile(
+                      title: Text(
+                    "Error",
+                    style: TextStyle(color: AppColor.white),
+                  ));
+                }
+              },
             ),
             ListTile(
               leading: const Icon(
@@ -91,6 +138,7 @@ class _CardScreenState extends State<CardScreen> {
                 spreadRadius: -5,
               ),
             ]),
+        //child: Text(MNumber),
       ),
     );
   }
