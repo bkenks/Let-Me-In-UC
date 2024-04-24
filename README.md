@@ -90,9 +90,13 @@ Benefits:
 ## Contact
 
 Brian Kenkel - [![LinkedIn][linkedin-shield]](https://linkedin.com/in/briankenkel) - briankenkel.t@gmail.com
+
 Hamza Rauf - [![LinkedIn][linkedin-shield]](linkedin.com/in/myachievement-hamza) - raufha@mail.uc.edu
+
 Abe Coogan - [![LinkedIn][linkedin-shield]](https://www.linkedin.com/in/abraham-coogan/) - aberz1031@gmail.com
+
 Jakob Brown - [![LinkedIn][linkedin-shield]](linkedin.com/in/jakob-brown-99b5321b9) - brown5jb@mail.uc.edu
+
 Bunci Patel - [![LinkedIn][linkedin-shield]](linkedin.com/in/bunci-patel-46a68716b) - sirpatel79@gmail.com
 
 Project Link: [https://github.com/bkenks/Let-Me-In-UC](https://github.com/bkenks/Let-Me-In-UC)
@@ -124,5 +128,4 @@ Project Link: [https://github.com/bkenks/Let-Me-In-UC](https://github.com/bkenks
 [issues-url]: https://github.com/bkenks/Let-Me-In-UC/issues
 [license-shield]: https://img.shields.io/github/license/bkenks/Let-Me-In-UC.svg?style=for-the-badge
 [license-url]: https://github.com/bkenks/Let-Me-In-UC/blob/master/LICENSE.txt
-[linkedin-shield]: https://img.shields.io/badge/-LinkedIn-black.svg?style=for-the-badge&logo=linkedin&colorB=555
-[linkedin-url]: https://linkedin.com/in/briankenkel
+[linkedin-shield]: https://img.shields.io/badge/LinkedIn-l?style=for-the-badge&logo=linkedin&logoColor=FFFFFF&color=0A66C2
