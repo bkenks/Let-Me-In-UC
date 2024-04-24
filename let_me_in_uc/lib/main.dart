@@ -106,24 +106,31 @@ class _LoginScreenState extends State<LoginScreen> {
         mainAxisAlignment: MainAxisAlignment.center,
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
+          const Image(
+            image: AssetImage('images/logolock.png'),
+            width: 100,
+          ),
+          const SizedBox(
+            height: 20.0,
+          ),
           const Text(
-            "Let Me In UC",
+            "Let Me In",
             style: TextStyle(
               color: AppColor.ucRed,
-              fontSize: 28.0,
-              fontWeight: FontWeight.bold,
+              fontSize: 45.0,
+              fontWeight: FontWeight.w900,
             ),
           ),
           const Text(
-            "Login",
+            "University of Cincinnati",
             style: TextStyle(
               color: AppColor.ucRed,
-              fontSize: 65.5,
+              fontSize: 17.5,
               fontWeight: FontWeight.bold,
             ),
           ),
           const SizedBox(
-            height: 44.0,
+            height: 80.0,
           ),
           TextField(
             style: const TextStyle(color: AppColor.ucRed),
@@ -166,7 +173,7 @@ class _LoginScreenState extends State<LoginScreen> {
             style: TextStyle(color: AppColor.ucRed),
           ),
           const SizedBox(
-            height: 88.0,
+            height: 60.0,
           ),
           Container(
             width: double.infinity,
@@ -183,8 +190,8 @@ class _LoginScreenState extends State<LoginScreen> {
                     context: context);
                 if (user != null) {
                   print(user.email);
-                  Navigator.of(context).pushReplacement(
-                     MaterialPageRoute(builder: (context) => CardScreen(user: user)));
+                  Navigator.of(context).pushReplacement(MaterialPageRoute(
+                      builder: (context) => CardScreen(user: user)));
 
                   // Uncomment to use alternate push. Need to add screen alias in main function first
                   // if (!mounted) return;
