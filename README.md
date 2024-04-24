@@ -1,5 +1,7 @@
 <a name="readme-top"></a>
 
+[![Contributors][contributors-shield]][contributors-url]
+
 <!-- PROJECT LOGO -->
 <br />
 <div align="center">
@@ -119,12 +121,3 @@ Project Link: [https://github.com/bkenks/Let-Me-In-UC](https://github.com/bkenks
 <!-- https://www.markdownguide.org/basic-syntax/#reference-style-links -->
 [contributors-shield]: https://img.shields.io/github/contributors/bkenks/Let-Me-In-UC.svg?style=for-the-badge
 [contributors-url]: https://github.com/bkenks/Let-Me-In-UC/graphs/contributors
-[forks-shield]: https://img.shields.io/github/forks/bkenks/Let-Me-In-UC.svg?style=for-the-badge
-[forks-url]: https://github.com/bkenks/Let-Me-In-UC/network/members
-[stars-shield]: https://img.shields.io/github/stars/bkenks/Let-Me-In-UC.svg?style=for-the-badge
-[stars-url]: https://github.com/bkenks/Let-Me-In-UC/stargazers
-[issues-shield]: https://img.shields.io/github/issues/bkenks/Let-Me-In-UC.svg?style=for-the-badge
-[issues-url]: https://github.com/bkenks/Let-Me-In-UC/issues
-[license-shield]: https://img.shields.io/github/license/bkenks/Let-Me-In-UC.svg?style=for-the-badge
-[license-url]: https://github.com/bkenks/Let-Me-In-UC/blob/master/LICENSE.txt
-[linkedin-shield]: https://img.shields.io/badge/LinkedIn-l?style=for-the-badge&logo=linkedin&logoColor=FFFFFF&color=0A66C2
