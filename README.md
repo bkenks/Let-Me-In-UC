@@ -39,6 +39,9 @@
 ## About The Project
 
 [![Product Name Screen Shot][product-screenshot]]
+<p align="center">
+<img src="/images/Demo.gif" width="30%" height="%"/>
+</p>
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
