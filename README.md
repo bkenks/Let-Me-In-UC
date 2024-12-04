@@ -10,7 +10,7 @@
 <h3 align="center">Let Me In UC</h3>
 
   <p align="center">
-    Let Me In UC (University of Cincinnati) is an application that uses a smartphone’s built-in communication services and biometric authentication tools to mediate physical and software access control for University of Cincinnati students, faculty, and staff.
+    Let Me In UC (University of Cincinnati) is an application that uses a smartphone’s built-in communication services and biometric authentication tools to mediate physical and software access control for University of Cincinnati students, faculty, and staff. The purpose of the project is to deliver a solution that primarily enhances security while also offering the added benefit of potential cost savings.
     <br />
     <br />
   </p>
